@@ -6,15 +6,19 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Consumidor consumidor = new Consumidor();
 		
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Informe o nome do cliente: ");
-		consumidor.nome = scanner.nextLine();
+		String nome = scanner.nextLine();
+		
+		System.out.print("Informe o telefone do cliente: ");
+		String telefone = scanner.nextLine();
 
 		System.out.print("Informe o número de compras do cliente: ");
 		int compras = scanner.nextInt();
-		consumidor.fiados = new int[compras];
+		
+		Consumidor consumidor = new Consumidor(nome, telefone, compras);
+		
 		int i = 0;
 		while (i < compras) {
 			System.out.print("Informe o valor da compra: ");
@@ -22,24 +26,19 @@ public class Main {
 			while (valor <= 0) {
 				System.out.print("Valor deve ser maior que zero. Informe um novo valor: ");
 				valor = scanner.nextInt();
-				consumidor.fiados[i] = valor;
 			}
-			consumidor.fiados[i] = valor;
+			consumidor.registrarFiado(valor);
 			i++;
 		}
 
-		int total = somaFor(consumidor.fiados);
+		int total = consumidor.getFiado();
 
-		System.out.println("Cliente " + consumidor.nome + " deve: " + total + " reais.");
-
-	}
-
-	public static int somaFor(int[] fiados) {
-		int total = 0;
-		for (int i = 0; i < fiados.length; i++) {
-			total += fiados[i];
+		if (total > 100) {
+			System.out.println("Cliente " + consumidor.getNome() + " deve: " + total + " reais. Seu telefone é: " + consumidor.getTelefone());
+		} else {
+			System.out.println("Cliente " + consumidor.getNome() + " deve menos que 100 reais. Seu telefone é: " + consumidor.getTelefone());
 		}
-		return total;
+
 	}
 
 }
