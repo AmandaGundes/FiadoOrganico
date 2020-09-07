@@ -6,13 +6,15 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		Consumidor consumidor = new Consumidor();
+		
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Informe o nome do cliente: ");
-		String nome = scanner.nextLine();
+		consumidor.nome = scanner.nextLine();
 
 		System.out.print("Informe o número de compras do cliente: ");
 		int compras = scanner.nextInt();
-		int[] fiados = new int[compras];
+		consumidor.fiados = new int[compras];
 		int i = 0;
 		while (i < compras) {
 			System.out.print("Informe o valor da compra: ");
@@ -20,15 +22,15 @@ public class Main {
 			while (valor <= 0) {
 				System.out.print("Valor deve ser maior que zero. Informe um novo valor: ");
 				valor = scanner.nextInt();
-				fiados[i] = valor;
+				consumidor.fiados[i] = valor;
 			}
-			fiados[i] = valor;
+			consumidor.fiados[i] = valor;
 			i++;
 		}
 
-		int total = somaFor(fiados);
+		int total = somaFor(consumidor.fiados);
 
-		System.out.println("Cliente " + nome + " deve: " + total + " reais.");
+		System.out.println("Cliente " + consumidor.nome + " deve: " + total + " reais.");
 
 	}
 
